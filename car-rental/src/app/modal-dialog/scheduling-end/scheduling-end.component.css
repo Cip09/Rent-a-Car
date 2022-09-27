@@ -1,0 +1,19 @@
+.close.mat-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+}
+
+.titleModal{
+    display: flex;
+    justify-content: space-between;
+}
+.carProperty{
+    font-family: 'Nanum Gothic',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}

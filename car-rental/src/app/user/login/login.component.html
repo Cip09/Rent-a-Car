@@ -1,0 +1,39 @@
+
+
+
+<!-- <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center"> -->
+<div style="display: flex; justify-content: center; margin-top: 70px;">
+  <mat-card class="box" style="width: 100%;">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup] = "formModel" autocomplete="off" (submit)="onSubmit()">
+      <div style="text-align: center;">
+          <div >
+          <mat-form-field class="example-full-width" style="width: 300px;">
+          
+            <input  matInput placeholder="Numele contului" name="UserName" formControlName = "UserName" required>
+
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width " style="width: 300px;">
+          
+            <input matInput type="password" placeholder="Parola"  name="Password" formControlName = "Password" required>
+          </mat-form-field>
+        </div>
+       
+      </div>
+      <button mat-stroked-button type="submit"  color="accent" class="btn-block">Log in</button>
+    </form>
+
+    <a style="margin-left: 5px;margin-top: 10px; text-align: center;"  href="/register" >Nu ai inca un cont? Inregistreaza-te</a>
+  </mat-card>
+</div>
+
+<!-- </div> -->
+
+
+
+

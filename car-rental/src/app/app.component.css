@@ -1,0 +1,57 @@
+.toolbarStyle{
+    background-color: #E5FFCC !important;
+}
+
+:host ::ng-deep mat-toolbar {
+    background-color: #E5FFCC !important;
+}
+
+
+  
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }
+
+  .mainDiv {
+    width: 100%;
+    height: 100%;
+}
+
+.notificationSpan{
+    position: static;
+    width: 107px;
+    height: 14px;
+    left: 0px;
+    top: 36px;
+}
+
+
+::marker{
+    color: #FFA000;
+}
+
+/* .noticationNonColor{
+    display: flex;
+    align-items: flex-end
+}
+
+.notificationColor{
+    display: flex;
+    background-color: #ffe9c3;
+    align-items: flex-end
+} */
+
+::ng-deep .notification-menu-header {
+  max-width: 486px !important;
+}
+
+.mouseHover{
+  cursor: pointer;
+}

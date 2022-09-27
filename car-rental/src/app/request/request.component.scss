@@ -1,0 +1,97 @@
+.titleAddCar{
+    background-color: #e4ffcce6;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    border-radius: 50px;
+}
+
+.divTitle{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.labelName{
+    font-family: "Times New Roman", Times, "Fantasy";
+    margin-left: 70px;
+    font-size: larger;
+    font-weight: bold;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+/////////////////////////////////////upload
+section {
+    flex-grow: 1;
+  }
+  
+  .file-drop-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 450px;
+    max-width: 100%;
+    padding: 25px;
+    border: 1px dashed rgba(15, 228, 61, 0.877);
+    border-radius: 3px;
+    transition: 0.2s;
+    &.is-active {
+      background-color: rgba(14, 184, 105, 0.05);
+    }
+  }
+  
+  .fake-btn {
+    flex-shrink: 0;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 8px 15px;
+    margin-right: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  
+  .file-msg {
+    font-size: small;
+    font-weight: 300;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+    &:focus {
+      outline: none;
+    }
+  }
+
+
+
+ 
+  
+  section {
+    flex-grow: 1;
+  }
+
+  .close {
+    cursor: pointer;
+    position: absolute;
+     top: 0%;
+     right: 0%;
+    padding: 12px 16px;
+    //transform: translate(0%, -50%);
+  }

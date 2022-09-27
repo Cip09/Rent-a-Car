@@ -1,0 +1,540 @@
+<div style="background-color: #f5f5f5; width: 100%; height: 100%;" >
+<div class="container">
+    <div class="row" style=" display: flex;justify-content: center;">
+        <form [formGroup]="carListGroup">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border: solid 1px; border-radius: 4px; position: relative; margin-top: 30px;">
+                <div class='labelTitle'>
+                    model masina
+                </div>
+                <div style="width: 100%; max-width: 100%!important;">
+                    <mat-form-field appearance="fill" class="example-full-width" style="width: 100%; max-width: 100%!important; margin-top: 15px;">
+                        <mat-label>Alte masini</mat-label>
+                        <mat-select formControlName="listCarForm" disableOptionCentering panelClass="myPanelClass">
+                        <mat-option *ngFor="let car of cars" [value]="car">{{car.carBrand}} {{car.modelCar}} {{car.engine}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <h1 style="text-align: center;">
+                    {{car?.carBrand}} {{car?.modelCar}}
+                </h1>
+                <div >
+                    <img style="width: 500px; margin-bottom: 10px;" [src]= car?.base64Image >
+                </div>
+            </div>
+        </form>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6" style="margin-top: 30px;">
+            
+            <form [formGroup]="dataPickerForm">
+                <div style=" border: solid 1px; border-radius: 4px ; position: relative ; text-align: center;">
+                    <p class="labelTitle">
+                        ALEGE DATELE
+                    </p>
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 15px;">
+                        
+                                <div>
+                                    <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                                    <mat-label>Data preluarii</mat-label>
+                                    <input matInput [matDatepicker]="takeDataForm" formControlName = "takeDataForm" [min]="today" [max]="maxDateTake">
+                                    <mat-datepicker-toggle matSuffix [for]="takeDataForm"></mat-datepicker-toggle>
+                                    <mat-datepicker #takeDataForm></mat-datepicker>
+                                    </mat-form-field>
+                                    <label class="text-danger" *ngIf="dataPickerForm.get('takeDataForm')!.touched && dataPickerForm.get('takeDataForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                                    
+                                </div>
+
+                                <div >
+                                    <mat-form-field appearance="fill" class="example-full-width" >
+                                        <mat-label>Locatia preluarii</mat-label>
+                                        <mat-select disableOptionCentering panelClass="myPanelClass"  formControlName ="takePlaceForm">
+                                        <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+                                        </mat-select>               
+                                    </mat-form-field>
+                                    <label class="text-danger" *ngIf="dataPickerForm.get('takePlaceForm')!.touched && dataPickerForm.get('takePlaceForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                                </div>
+                               
+                                
+                            </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 timepicker">
+                            <div style="background-color: white; width: 180px;">
+                                <div class="ngx-timepicker-field-example">
+                                    <ngx-timepicker-field [format]="24" [defaultTime]="'12:00'" formControlName = "timeTakeForm"></ngx-timepicker-field>
+                                </div>
+                            </div>
+                            
+                        </div>  
+                    </div>
+                    
+
+                        
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 15px;">
+                            <div>
+                                <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                                    <mat-label>Data predarii</mat-label>
+                                    <input matInput [matDatepicker]="returnDataForm" formControlName = "returnDataForm" [min]="minDate" [max]="maxDate">
+                                    <mat-datepicker-toggle matSuffix [for]="returnDataForm"></mat-datepicker-toggle>
+                                    <mat-datepicker #returnDataForm></mat-datepicker>
+                                </mat-form-field>
+                            </div> 
+                            <label class="text-danger" *ngIf="dataPickerForm.get('returnDataForm')!.touched && dataPickerForm.get('returnDataForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                            <div>
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Locatia predarii</mat-label>
+                                    <mat-select disableOptionCentering panelClass="myPanelClass"  formControlName ="returnPlaceForm">
+                                    <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+                                    </mat-select>               
+                                </mat-form-field>
+                                <label class="text-danger" *ngIf="dataPickerForm.get('returnPlaceForm')!.touched && dataPickerForm.get('returnPlaceForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 timepicker" style="margin-top: 15px;">
+                            <div style="background-color: white; width: 180px;">
+                                <div class="ngx-timepicker-field-example">
+                                    <ngx-timepicker-field formControlName = "timeRetunForm" [format]="24" [defaultTime]="'12:00'" ></ngx-timepicker-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div style="background-color: white; margin-top: 15px;" >
+                    <div style="display: flex; justify-content: space-around; font-size: 15px; " >
+                        <div *ngIf="priceHide == true" style="display: flex; padding: 15px; ">
+                            <div  class="carPrice">
+                                {{car.pricePerDay}} €
+                            </div>
+                            <div>
+                                /Zi
+                            </div>
+                        </div>
+                        <div style="display: flex; padding: 15px; " *ngIf="priceHide == true ">
+                            <div  class="carPrice">
+                                Total {{this.totalPrice}} €
+                            </div>
+                            <div *ngIf="totalDayRent > 1">
+                                /{{totalDayRent}} Zile
+                            </div>
+                            <div *ngIf="totalDayRent == 1">
+                                / O Zi
+                            </div>
+                        </div>
+                    </div>
+             
+                </div>
+                <div style="margin-top: 20px; border: solid 1px; border-radius: 4px ; position: relative ;">
+                    <p class="labelTitle">
+                        Text
+                    </p>
+                    <div class="row">
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> An:</span>
+                                <span style="color: #cca602;">  {{car?.year}}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Capacitate motor:</span>
+                                <span style="color: #cca602;">  {{car?.engine}} L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Tractiune:</span>
+                                <span style="color: #cca602;">  {{car?.traction}}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Cutie viteze:</span>
+                                <span style="color: #cca602;">  {{car?.gearBox}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Putere:</span>
+                                <span style="color: #cca602;">  {{car?.enginePower}} CP</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Consum:</span>
+                                <span style="color: #cca602;">  {{car?.fuelConsumption}} L/100KM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Climatronic:</span>
+                                <span style="color: #cca602;" *ngIf="car?.climate == true">  Da</span>
+                                <span style="color: #cca602;" *ngIf="car?.climate == false">  Nu</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Navigatie:</span>
+                                <span style="color: #cca602;" *ngIf="car?.navigation == true">  Da</span>
+                                <span style="color: #cca602;" *ngIf="car?.navigation == false">  Nu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Numar de usi:</span>
+                                <span style="color: #cca602;">  {{car?.doorNumbers}}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Numar de locuri:</span>
+                                <span style="color: #cca602;">  {{car?.seatNumbers}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 15px;">
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Compiuter de bord:</span>
+                                <span style="color: #cca602;" *ngIf="car?.boardComputer == true"> Da </span>
+                                <span style="color: #cca602;" *ngIf="car?.boardComputer == false"> Nu </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;">Culoare:</span>
+                              
+                                <span style="color: #cca602;">  {{car?.colorCar}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 15px;">
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Kilometri:</span>
+                                <span style="color: #cca602;">  {{car?.carKm}} Km</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;">Ultima revizie la:</span>
+                                <span style="color: #cca602;">  {{car?.lastServicesKm}} Km</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 15px;">
+                        
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;"> Data expirare ITP:</span>
+                                <span style="color: #cca602;" *ngIf="differentceITP(car) > 15">  {{car?.itpFormat}} </span>
+                                <span style="color: red;" *ngIf="differentceITP(car) <= 15">  {{car?.itpFormat}} </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div  class="carProperty" style="margin-top: 20px;">
+                                <span style="margin-right: 8px;">Data ultimei revizii :</span>
+                                <span style="color: #cca602;">  {{car?.lastServicesDataFormat}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            
+                
+            </form> 
+        </div>
+        
+    </div>
+</div>
+
+
+    <div class="container"  style="margin-top: 40px;">
+        <form [formGroup]="personalDataGroup">
+            <div class="row container">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-top: 20px;">
+                <div style="border: solid 1px; border-radius: 4px ; position: relative ;" >
+                    <div class="labelTitle">
+                            Date Persoanle
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6"  >
+                                <div>
+                                    <div class="titleLabel">
+                                        <mat-label>Nume Complet</mat-label>
+                                    </div>
+                                    <div>
+                                        <mat-form-field class="example-full-width" >                     
+                                            <input  matInput formControlName="completNameForm">
+                                        </mat-form-field>
+                                        <label class="text-danger" *ngIf="personalDataGroup.get('completNameForm')!.touched && personalDataGroup.get('completNameForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                                        <label class="text-danger" *ngIf="personalDataGroup.get('completNameForm')!.touched && personalDataGroup.get('completNameForm')!.errors?.pattern">Acest camp trebuie sa continuna doare litere</label>
+                                       
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="titleLabel">
+                                        <mat-label>Adresa </mat-label>
+                                    </div>
+                                    <div>
+                                        <div >
+                                            <mat-form-field class="example-full-width" >                     
+                                                <input  matInput formControlName="adressForm">
+                                            </mat-form-field>
+                                            <label class="text-danger" style="margin-bottom: 10px;" *ngIf="personalDataGroup.get('adressForm')!.touched && personalDataGroup.get('adressForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                                        </div>
+                                        <div class="mentionLabel" style="margin-top: -15px;">
+                                            *Necesar daca e diferita de cea a contului
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <div class="titleLabel">
+                                                Telefon
+                                        </div>
+                                        <div >
+                                            <div >
+                                                <mat-form-field class="example-full-width" >                     
+                                                    <input  matInput formControlName="phoneNumberForm" > 
+                                                    
+                                                </mat-form-field>
+                                                <label class="text-danger" *ngIf="personalDataGroup.get('phoneNumberForm')!.touched && personalDataGroup.get('phoneNumberForm')!.errors?.required">Acest camp este obligatoriu.</label>
+                                                <label class="text-danger" *ngIf="personalDataGroup.get('phoneNumberForm')!.touched && personalDataGroup.get('phoneNumberForm')!.errors?.pattern">Acest camp trebuie sa continuna doare cifre</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div >
+                                    Alte mentiuni
+                                </div>
+                                <div >
+                                    <textarea style="border: solid 1px; border-radius: 5px; padding: 10px; max-height: 210px;" 
+                                    cols="20" rows="10" formControlName="mentionForm">
+                                </textarea>
+                                </div>
+                            
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 " style="border: solid 1px; border-radius: 4px ; position: relative; margin-top: 20px;">
+                    <div>
+                        <div class="labelTitle">
+                            Alte optinui
+                        </div>
+                        <div>
+                        
+                            <mat-checkbox class="example-margin" style="padding: 15px;" value="1" (change)="chackBoxOptionChange($event)" [checked]= this.checkBox>GPS : 5 €</mat-checkbox>
+                        
+                        </div>
+                        <div>
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" style="padding-left: 15px; padding-bottom: 15px;" (change)="chackBoxOptionChange($event)" [checked]= this.checkBox>Scaun de copil : 10 €</mat-checkbox>
+                            </section>
+                        </div>
+                        <div>
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" style="padding-left: 15px; padding-bottom: 15px;" (change)="chackBoxOptionChange($event)" [checked]= this.checkBox>Lichid de parbriz suplimentar : 3 €</mat-checkbox>                          
+                            </section>
+                        </div>
+                        <div>
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" style="padding-left: 15px; padding-bottom: 15px;"(change)="chackBoxOptionChange($event)" [checked]= this.checkBox>Lanturi zapada : 5 €</mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </form>
+         <div *ngIf="priceHide == true">
+            <div style="text-align: center;" class="rentCard">
+                <div >
+                    <h1>
+                        Sumar Rezervare
+                    </h1>
+                    <hr>
+                    <div class="infoRent" style="margin-top: 10px;">
+                        Numar de zile: {{totalDayRent}}
+                    </div>
+                    <div class="infoRent" style="margin-top: 10px;">
+                        Pret total: {{totalPrice}} €
+                    </div>
+                    <div class="infoRent" style="margin-top: 10px;">
+                        Garantie: {{250}} €
+                    </div>
+                    <div class="infoRent" style="margin-top: 10px;">
+                        Locul si ora de preluare: {{DataStartFormat}} {{this.dataPickerForm?.value.timeTakeForm}}
+                    </div>
+                    <div class="infoRent" style="margin-top: 10px;">
+                        Locul si ora de predarii: {{DataEndFormat}} {{this.dataPickerForm?.value.timeRetunForm}}
+                    </div>
+                </div>
+                <div style="display: flex;justify-content: center; margin-top: 30px;">
+                    <mat-radio-group aria-label="Select an option" style="display: flex; flex-direction: column; " >
+                        <mat-radio-button value="1" (change)="radioChange($event)" [checked]="true" >Plata cash la primirea masinii</mat-radio-button>
+                        <mat-radio-button value="2" (change)="radioChange($event)">Plata cu cardul la primirea masinii</mat-radio-button>
+                        <mat-radio-button value="3" (change)="radioChange($event)" >Plata cu cardul - online</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div style="display: flex;justify-content: center;margin-top: 10px;">
+                    <mat-checkbox class="example-margin" style="padding-left: 15px; padding-bottom: 15px;"(change)="chackBoxOptionChange($event)">Sunt de acord cu </mat-checkbox>
+                    <a style="margin-left: 5px;margin-top: 2px;" target="_blank" href="/conditions" >Termenii si conditiile</a>
+                </div>
+                <!-- href="http://localhost:4200/rent-car-list" -->
+            </div>
+        
+
+        
+            <!------------------------ car pay --------------------------------->
+            <div>
+                <div class="container py-5" *ngIf="onlinePay == true">
+        
+                    <div class="row">
+                    <div class="col-lg-7 mx-auto">
+                        <div class="bg-white rounded-lg shadow-sm p-5">
+                        <!-- Credit card form tabs -->
+                        <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                            <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-card" class="nav-link active rounded-pill">
+                                                <i class="fa fa-credit-card"></i>
+                                                Credit Card
+                                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-paypal" class="nav-link rounded-pill">
+                                                <i class="fa fa-paypal"></i>
+                                                Paypal
+                                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a data-toggle="pill" href="#nav-tab-bank" class="nav-link rounded-pill">
+                                                <i class="fa fa-university"></i>
+                                                Bank Transfer
+                                            </a>
+                            </li>
+                        </ul>
+                        <!-- End -->
+                
+                
+                        <!-- Credit card form content -->
+                        <div class="tab-content">
+                
+                            <!-- credit card info-->
+                            <div id="nav-tab-card" class="tab-pane fade show active">
+                            
+                            <form role="form">
+                                <div class="form-group">
+                                <label for="username">Numele complet </label>
+                                <input type="text" name="username" placeholder="Boghian Ciprian" required class="form-control">
+                                </div>
+                                <div class="form-group">
+                                <label for="cardNumber">Numarul Cardului</label>
+                                <div class="input-group">
+                                    <input type="text" (change)="onChnageNumberCardInput($event)" name="cardNumber" placeholder="0000 0000 0000 0000" class="form-control" required>
+                                    <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                                                <i class="fa fa-cc-visa mx-1"></i>
+                                                                <i class="fa fa-cc-amex mx-1"></i>
+                                                                <i class="fa fa-cc-mastercard mx-1"></i>
+                                                            </span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                    <label><span class="hidden-xs">Expiration</span></label>
+                                    <div class="input-group">
+                                        <input type="number" placeholder="MM" name="" class="form-control" required>
+                                        <input type="number" placeholder="YY" name="" class="form-control" required>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group mb-4">
+                                    <label title="Trei cifre pe spatele cardului">CVV
+                                                                <i class="fa fa-question-circle"></i>
+                                                            </label>
+                                    <input type="text" required class="form-control">
+                                    </div>
+                                </div>
+                
+                
+                
+                                </div>
+                            
+                            </form>
+                            </div>
+                            <!-- End -->
+                
+                            <!-- Paypal info -->
+                            <div id="nav-tab-paypal" class="tab-pane fade">
+                            <p>Paypal, cea mai usoara plata online</p>
+                            <p>
+                                <button type="button" class="btn btn-primary rounded-pill"><i class="fa fa-paypal mr-2"></i> Log into my Paypal</button>
+                            </p>
+                            
+                            </div>
+                            <!-- End -->
+                
+                            <!-- bank transfer info -->
+                            <div id="nav-tab-bank" class="tab-pane fade">
+                            <h6>Contul bancar</h6>
+                            <dl>
+                                <dt>Banca</dt>
+                                <dd> THE WORLD BANK</dd>
+                            </dl>
+                            <dl>
+                                <dt>Numarul contului</dt>
+                                <dd>00000000000000</dd>
+                            </dl>
+                            <dl>
+                                <dt>IBAN</dt>
+                                <dd>00000000000000</dd>
+                            </dl>
+                            
+                            </div>
+                            <!-- End -->
+                        </div>
+                        <!-- End -->
+                
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!------------------------ end card pay ---------------------------->
+            <div style="text-align: center;">
+                <button mat-raised-button  style="background-color: #cca602;" 
+                (click)="sentRequestRent()" [disabled]="(conditionsValid != true) || (!personalDataGroup.valid) || (!dataPickerForm.valid)">
+                 Trimite Rezervarea</button>
+            </div>
+        </div>
+    </div>
+
+ 
+    
+<div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

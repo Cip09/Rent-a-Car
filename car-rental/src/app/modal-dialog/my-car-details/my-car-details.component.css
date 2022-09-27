@@ -1,0 +1,11 @@
+.titleModal{
+    display: flex;
+    justify-content: space-between;
+}
+
+.alighText{
+    text-align: center;
+}
+.lastKmRevizion{
+    margin-left: 10px;    
+}

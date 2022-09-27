@@ -1,0 +1,301 @@
+<div class="divTitle">
+    <H1 class="titleAddCar">Adauga propria masina pentru inchiriere in aplicatia noastra</H1>
+</div>
+
+<div>
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="generalDataForm">
+            <form [formGroup]="generalDataForm">
+
+                <ng-template matStepLabel>Date generale</ng-template>
+                <div style="text-align: center; padding-top: 10px;">
+                    <div>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Marca</mat-label>
+                            <mat-select formControlName="brandCarForm" disableOptionCentering panelClass="myPanelClass">
+
+                                <mat-option *ngFor="let BrandCar of BrandCar" [value]="BrandCar">{{BrandCar}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Modelul masinii</mat-label>
+                            <input matInput formControlName="modelCarForm">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Culoare</mat-label>
+                            <input matInput formControlName="colorCarForm">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Combustibil</mat-label>
+                            <mat-select formControlName="fuelCarFrom" disableOptionCentering panelClass="myPanelClass">
+                                <mat-option value="Motorina"> Motorina</mat-option>
+                                <mat-option value="Benzina"> Benzina</mat-option>
+                                <mat-option value="Electrica"> Electrica</mat-option>
+                                <mat-option value="Hybrid"> Hybrid</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div style="text-align: end; ">
+                    <button mat-raised-button style="color : #cca602" matStepperNext>Urmatorul</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="tehnicalDataForm">
+            <form [formGroup]="tehnicalDataForm">
+                <ng-template matStepLabel>Date tehnice</ng-template>
+                <div class="row pt-3" style="text-align: center; ">
+
+                    <div class="col-md-6 col-xs-12">
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>An fabricatie</mat-label>
+                                <input matInput formControlName="yearForm">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Putere Motor (CP)</mat-label>
+                                <input matInput formControlName="powerEngineForm">
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Capacitate cilindrica (L)</mat-label>
+                                <input matInput formControlName="engineCarForm">
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Consum (L/KM) </mat-label>
+                                <input matInput formControlName="fuelConsumtionForm">
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Tractiune</mat-label>
+                                <mat-select formControlName="tractionForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="Fata"> Fata</mat-option>
+                                    <mat-option value="Spate"> Spate</mat-option>
+                                    <mat-option value="Integrala(4x4)"> Integrala(4x4)</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Cutie de viteze</mat-label>
+                                <mat-select formControlName="gearBoxForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="Manuala"> Manuala</mat-option>
+                                    <mat-option value="Automata"> Automata</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Km masina</mat-label>
+                                <input matInput formControlName="carKmForm">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                                <mat-label>Data ultimei revizii</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="lastServicesDataForm" [max]="today">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Ultimul service KM</mat-label>
+                                <input matInput formControlName="lastServicesKmForm">
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                                <mat-label>Inspectia tehnica(ITP)</mat-label>
+                                <input matInput [matDatepicker]="pickerITP" [min]="today" formControlName="itpForm">
+                                <mat-datepicker-toggle matSuffix [for]="pickerITP"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerITP></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <button mat-raised-button matStepperPrevious style="color : #cca602">Inapoi</button>
+                    <button mat-raised-button matStepperNext style="color : #cca602">Urmatorul</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="confortDataForm">
+            <form [formGroup]="confortDataForm">
+                <ng-template matStepLabel>Date de confort</ng-template>
+                <div class="row" style="text-align: center; padding-top: 10px;">
+                    <div class="col-md-6 col-xs-12">
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Numar portiere</mat-label>
+                                <mat-select formControlName="doorNumbersForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="2"> 2</mat-option>
+                                    <mat-option value="3"> 3</mat-option>
+                                    <mat-option value="4"> 4</mat-option>
+                                    <mat-option value="5"> 5</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Categoria masinii</mat-label>
+                                <mat-select formControlName="categoryCarForm" multiple disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option *ngFor="let categoryCar of categoryCar" [value]="categoryCar">
+                                        {{categoryCar}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Numar scaune</mat-label>
+                                <mat-select formControlName="seatNumbersForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="2"> 2</mat-option>
+                                    <mat-option value="3"> 3</mat-option>
+                                    <mat-option value="4"> 4</mat-option>
+                                    <mat-option value="5"> 5</mat-option>
+                                    <mat-option value="6"> 6</mat-option>
+                                    <mat-option value="7"> 7</mat-option>
+                                    <mat-option value="8"> 8</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Navigatie</mat-label>
+                                <mat-select formControlName="navigationForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="true"> Da</mat-option>
+                                    <mat-option value="false"> Nu</mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Climatizare</mat-label>
+                                <mat-select formControlName="climateForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="true"> Da</mat-option>
+                                    <mat-option value="false"> Nu</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Computer de bord</mat-label>
+                                <mat-select formControlName="boardComputerForm" disableOptionCentering
+                                    panelClass="myPanelClass">
+                                    <mat-option value="true"> Da</mat-option>
+                                    <mat-option value="false"> Nu</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <button mat-raised-button style="color : #cca602" matStepperPrevious>Inapoi</button>
+                    <button mat-raised-button style="color : #cca602" matStepperNext>Urmatorul</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="priceForm">
+            <form [formGroup]="priceForm">
+                <ng-template matStepLabel>Pret</ng-template>
+                <div style="text-align: center; padding-top: 10px;">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Pret pe zi(€/zi)</mat-label>
+                        <input matInput formControlName="priceCarFrom">
+                    </mat-form-field>
+
+                    <div style="display: flex; justify-content: center;">
+                        <div class="file-drop-area" style="width:max-content;">
+                            <span class="fake-btn" *ngIf="loading == false">Choose files</span>
+                            <span class="file-msg" *ngIf="loading == false">or drag and drop files here</span>
+                            <input #myInput class="file-input" type="file" (change)="onChange($event)">
+                            <span class="close" *ngIf="loading == true" (click)="removeFile()">&times;</span>
+                            <img *ngIf="loading == true" style="max-width: 300px;" [src]="imageBlobUrl">
+                        </div>
+                        <div *ngIf="needPhoto == true" style="color:red">
+                            necesita poza!
+                        </div>
+
+                    </div>
+
+                </div>
+                <div style="display: flex; justify-content: space-around;">
+                    <button mat-raised-button matStepperPrevious style="color : #cca602">Inapoi</button>
+                    <button mat-raised-button matStepperNext style="color : #cca602">Urmatorul</button>
+                   
+                </div>
+                <div style="height: 50px;">
+
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Final</ng-template>
+            <form [formGroup]="mentionGroup">
+                <div style="text-align: center;">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Mentiuni</mat-label>
+                        <input matInput formControlName="mentionForm">
+                    </mat-form-field>
+                   
+                </div>
+            </form>
+
+            <div>
+                <div style="text-align: center;">
+                    <button mat-raised-button style="color : #cca602" (click)="onSubmit()"> Trimite cerere de adaugare
+                        masina</button>
+                </div>
+                <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                    <button mat-raised-button matStepperPrevious style="color : #cca602">Inapoi</button>
+                    <button mat-raised-button matStepperPrevious style="color : #cca602"
+                        (click)="stepper.reset()">Reset</button>
+                </div>
+
+                <div style="height: 70px;">
+                        
+                </div>
+            </div>
+
+            
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
+
+<app-footer></app-footer>

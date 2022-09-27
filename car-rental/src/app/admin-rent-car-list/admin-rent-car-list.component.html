@@ -1,0 +1,104 @@
+<div class="container">
+    <h1 style="text-align: center; margin-top: 20px;">Masinile active</h1>
+    <table mat-table [dataSource]="carList_dataTable" class="mat-elevation-z8" style="width: 100%;">
+
+        <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef style="width: 70px;" >Nr. masina</th>
+            <td mat-cell *matCellDef="let element" style="width: 70px;" >{{element.id}}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="carBrand" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Marca</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   {{element.carBrand}} {{element.modelCar}}</td>
+          </ng-container>
+          <ng-container matColumnDef="pricePerDay" class="celAlighn">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Pret de inchiriere</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   {{element.pricePerDay}} €/zi</td>
+          </ng-container>
+          <ng-container matColumnDef="kmCar" class="celAlighn">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Data expirtare ITP</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   
+               <span style="color:red; margin-left: 10px;" *ngIf="differentceITP(element) <= 15">
+                {{element?.itpFormat}} 
+                </span>
+              <span style="color:#cca502; margin-left: 10px;" *ngIf="differentceITP(element) > 15">
+                  {{element?.itpFormat}} 
+              </span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="image" class="celAlighn" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Nume Proprietar</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   
+            {{element.carOwner?.fullName}}
+            </td>
+          </ng-container>
+
+        <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+   
+          
+  <tr mat-header-row *matHeaderRowDef="carList_displayedColumns"></tr>
+  <tr
+      mat-row 
+      (click)="onClickedOpenDetalisCar(row)"
+  
+      *matRowDef="let row; columns: carList_displayedColumns;"
+  ></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" 
+    showFirstLastButtons></mat-paginator>
+
+
+    <h1 style="text-align: center; margin-top: 20px;">Masinile care urmeaza sa fie retrase</h1>
+
+    <table mat-table [dataSource]="carListRetreat_dataTable" class="mat-elevation-z8" style="width: 100%;">
+
+        <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef style="width: 70px;" >Nr. masina</th>
+            <td mat-cell *matCellDef="let element" style="width: 70px;" >{{element.car.id}}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="carBrand" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Marca</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   {{element.car.carBrand}} {{element.car.modelCar}}</td>
+          </ng-container>
+          <ng-container matColumnDef="pricePerDay" class="celAlighn">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Pret de inchiriere</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   {{element.car.pricePerDay}} €/zi</td>
+          </ng-container>
+   
+          <ng-container matColumnDef="fullName" class="celAlighn" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Nume Proprietar</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">   
+            {{element.car.carOwner?.fullName}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="interval" class="celAlighn">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Interval de retragere</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;">  
+                <div *ngIf="element.schedulingStatus == 7">
+                 {{element.startDataFormat}} > {{element.finishDataFormat}}
+                </div>
+            
+                <div *ngIf="element.schedulingStatus == 8">
+                  {{element.startDataFormat}} (permanent)
+                 </div>
+                 </td>
+          </ng-container>
+
+        <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+   
+          
+  <tr mat-header-row *matHeaderRowDef="carListRetreat_displayedColumns"></tr>
+  <tr
+      mat-row 
+    (click)="onClickOpenDetaliRetreat(row)"
+      
+      *matRowDef="let row; columns: carListRetreat_displayedColumns;"
+  ></tr>
+    </table>
+    <mat-paginator #paginatorRetreat [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<app-footer></app-footer>

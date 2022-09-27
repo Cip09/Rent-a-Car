@@ -1,0 +1,59 @@
+<h1 style="text-align: center; margin-top:20px">Cereri de adaugare masini in aplicatie</h1>
+
+<form [formGroup]="requestList_Form" class="container">
+  <table mat-table [dataSource]="requestList_dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef style="display:none;">id</th>
+      <td mat-cell *matCellDef="let element" style="display:none;">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef class="celAlighn">Nume</th>
+      <td mat-cell *matCellDef="let element" class="celAlighn"> {{element.carDTO?.carOwner.fullName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="carBrand">
+      <th mat-header-cell *matHeaderCellDef>Marca</th>
+      <td mat-cell *matCellDef="let element"> {{element.carDTO.carBrand}}</td>
+    </ng-container>
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef>Model</th>
+      <td mat-cell *matCellDef="let element"> {{element.carDTO.modelCar}}</td>
+    </ng-container>
+    <ng-container matColumnDef="image" class="celAlighn">
+      <th mat-header-cell *matHeaderCellDef class="celAlighn">Imagine</th>
+      <td mat-cell *matCellDef="let element" class="celAlighn">
+        <div [style]="'text-align: center; border-bottom: #e8e8e8 solid; width: 100%; height: 250px;    background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+              background-origin: content-box; background-image: url(' + element.carDTO.base64Image + ');'">
+
+          <!-- <img [src]= car.base64Image  > -->
+
+        </div>
+
+      </td>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="message">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;">Mesaj</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.message}}</td>
+    </ng-container>
+
+
+    <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="requestList_displayedColumns"></tr>
+    <tr mat-row (click)="isClickedRows(row)" *matRowDef="let row; columns: requestList_displayedColumns;"></tr>
+
+
+  </table>
+
+
+
+</form>
+
+<app-footer></app-footer>

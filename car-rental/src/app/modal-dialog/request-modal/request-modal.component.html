@@ -1,0 +1,133 @@
+<div style="width: 660px;">
+  <div class="titleModal">
+    <h2>Cerere de aprobare masina </h2>
+    <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon"
+      (click)="close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+  <hr>
+
+  <div class="row" style="border-bottom: #e8e8e8 solid 1px; ">
+    <div class="col-6" style="border-right: #e8e8e8 solid 1px; ">
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Numele proprietarului:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.carOwner.fullName}}
+        </div>
+      </div>
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Masina:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.carBrand}} {{this.car.modelCar}}
+        </div>
+      </div>
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Culoare:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.colorCar}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Kilometrii actuali:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.carKm}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Locuri (Scaune in masina):
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.seatNumbers}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Numar portiere:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.doorNumbers}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Data ultimei revizii:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.lastServiceDataFormat}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Ultima revizie in km:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          {{this.car.lastServicesKm}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+         Data de expirare a ITP-ului:
+        </div>
+
+        <div style="color:#cca502; margin-left: 10px;"  *ngIf="differentceITP(car) > 15">
+          {{this.car?.itpFormat}}
+        </div>
+        <div style="color:red; margin-left: 10px;"  *ngIf="differentceITP(car) <= 15">
+          {{this.car?.itpFormat}}
+        </div>
+      </div>
+
+      <div class="carProperty" style="display: flex; margin-top: 10px;">
+        <div>
+          Categoria masinii:
+        </div>
+        <div style="color:#cca502; margin-left: 10px;">
+          <span *ngFor="let categoryCar of  this.data.row.carDTO.categoryCar">{{categoryCar.nameCategoryCar}} </span>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+    <div class="col-6">
+
+      <div [style]="'text-align: center;width: 100%; height: 250px;    background-repeat: no-repeat;
+               background-position: center;
+               background-size: cover;
+               background-origin: content-box; background-image: url(' + this.data.row.carDTO?.base64Image + ');'">
+
+        <!-- <img [src]= car.base64Image  > -->
+
+      </div>
+
+      <div style="display: flex; justify-content: space-evenly; margin-bottom: 15px; margin-top: 15px;">
+        <button mat-raised-button style="color: #cca502;" (click)="aproveRequest()"> Aprobare</button>
+        <button mat-raised-button style="color: #cca502;" (click)="rejectRequest()"> Respingere</button>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

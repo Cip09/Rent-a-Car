@@ -1,0 +1,7 @@
+.titleModal{
+    display: flex;
+    justify-content: space-between;
+}
+.alighText{
+    text-align: center;
+}

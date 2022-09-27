@@ -1,0 +1,220 @@
+<div style="width: 800px; max-height: 630px;">
+    <div class="titleModal">
+        <h2>Detalii masina </h2>
+        <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon"
+            [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <hr>
+
+    <div class="row" style="border-bottom: solid 1px  rgba(0,0,0,.1); padding-bottom: 20px;">
+        <div class="col-md-8 col-xs-12">
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numele proprietarului:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car?.carOwner?.fullName}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numar de telefon:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car?.carOwner?.phoneNumber}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Masina:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car?.carBrand}} {{this.car?.modelCar}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Pret pe zi:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car?.pricePerDay}} €
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Km in perioada de inchiriere:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{travelKm}} Km
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Km masina la retragere:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car?.carKm}} Km
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;"
+                *ngIf=" this.data.row.schedulingStatus == 7">
+                <div>
+                    Perioada de retragere temporara:
+
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.data.row?.startDataFormat}} > {{this.data.row?.finishDataFormat}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;"
+                *ngIf=" this.data.row.schedulingStatus == 8">
+                <div>
+                    Perioada de retragere permanenta:
+
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.data.row?.startDataFormat}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Motiv de retragere:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.data.row?.mention}} 
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="col-md-4 col-xs-12">
+
+            <div style="margin-bottom: 20px;">
+                <div class="carProperty" style="display: flex; margin-top: 10px;">
+                    <div>
+                        Masina cu numarul:
+                    </div>
+                    <div style="color:#cca502; margin-left: 10px; font-size: 50px;">
+                        {{this.car?.id}}
+                    </div>
+                </div>
+            </div>
+            <div [style]="'text-align: center; border-bottom: #e8e8e8 solid; width: 100%; height: 250px;    background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-origin: content-box; background-image: url(' + this.data.row.car?.base64Image + ');'">
+
+                <!-- <img [src]= car.base64Image  > -->
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <div style="width: 100%;text-align: center;">
+        <button mat-raised-button style="color: #cca502;  margin-top: 15px;"
+            (click)="showHistory()">Vezi istoricul</button>
+    </div>
+    <div *ngIf="showHistoryBool == true">
+        <div *ngIf="historyAproved_dataSource?.length > 0 && this.showHistoryBool == true"
+            style="margin-top:20px; width: 100%;">
+
+            <table mat-table [dataSource]="historyApproved_dataTable" class="mat-elevation-z8" style="width: 100%;">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef style="display:none;">id</th>
+                    <td mat-cell *matCellDef="let element" style="display:none;">{{element.id}}</td>
+                </ng-container>
+                <ng-container matColumnDef="fullName" class="celAlighn">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn" style="padding-left: 10px;">Nume</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn" style="padding-left: 10px;">
+                        {{element.fullNameClient}}</td>
+                </ng-container>
+                <ng-container matColumnDef="data">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Interval inchiriere</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn alighText"> {{element.startData}} >
+                        {{element.endData}}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="dayLate" class="celAlighn">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Zile intarziere</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                        <div *ngIf="element.dayLate != 0">
+                            {{element.dayLate}}
+                        </div>
+
+                        <div *ngIf="element.dayLate == 0">
+                            <mat-icon style="color: green">close</mat-icon>
+                        </div>
+                    </td>
+
+                </ng-container>
+
+                <ng-container matColumnDef="externalDefects" class="celAlighn">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Defecte</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                        <div *ngIf="element.externalDefects == true || element.internalDefects == true">
+                            <mat-icon style="color: red">check</mat-icon>
+                        </div>
+                        <div *ngIf="element.externalDefects == false || element.internalDefects == false">
+                            <mat-icon style="color: green">close</mat-icon>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="moneyPaid" class="celAlighn ">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Pret total</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                        {{element.moneyPaid}} €
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="returnWarranty" class="celAlighn alighText">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Reparatii pe garantie</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                        <div *ngIf="element.returnWarranty == true">
+                            <mat-icon style="color: green">check</mat-icon>
+                        </div>
+                        <div *ngIf="element.returnWarranty == false">
+                            <mat-icon style="color: red">close</mat-icon>
+                        </div>
+                    </td>
+
+                </ng-container>
+
+                <ng-container matColumnDef="kmTraveled" class="celAlighn alighText">
+                    <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Km parcursi</th>
+                    <td mat-cell *matCellDef="let element" class="celAlighn alighText">{{element.kmTraveled}} Km</td>
+
+                </ng-container>
+
+
+                <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+                <tr mat-header-row *matHeaderRowDef="historyAproved_displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: historyAproved_displayedColumns;"></tr>
+            </table>
+            <mat-paginator #paginatorApproved [pageSizeOptions]="[2, 5, 10]" showFirstLastButtons></mat-paginator>
+
+        </div>
+
+        <div *ngIf="(historyAproved_dataSource?.length == 0 || historyAproved_dataSource == null) && this.showHistoryBool == true"
+            style="text-align: center; margin-top: 30px;">
+            Nu exista date!
+        </div>
+
+
+    </div>
+
+</div>

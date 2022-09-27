@@ -1,0 +1,155 @@
+<div style="width: 800px;">
+    <div class="titleModal">
+      <h2>Returnare masina de catre client</h2>
+    <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon" [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+   
+    </div>
+    <hr>
+    
+    <div class="row">
+      
+        <div  class="col-md-6 " >
+            <form [formGroup]="userHistoryGroup">
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div >
+                   Kilometri parcursi
+                    </div>
+                    <div style="margin-left: 42px;">
+                        <input style='width: 100px;' formControlName ='kmTraveledForm' > 
+                    </div> 
+                    <div style="margin-left: 10px; margin-top:4px">
+                        Km
+                    </div>
+                </div>
+                <div class="carProperty" style="display: flex; margin-top: 10px; justify-content: space-between;" >
+                    <div style="display: flex; margin-bottom: 10px;">
+                        <div >
+                        Zile intarziere: 
+                        </div>
+                        <div style="margin-left: 50px;">
+                            <mat-radio-group aria-label="Select an option" (change)="dayLate()">
+                                <mat-radio-button value="false" checked="checked">Nu</mat-radio-button>
+                                <mat-radio-button style="margin-left:5px" value="true">Da</mat-radio-button>
+                            </mat-radio-group>
+                        </div> 
+                    </div>
+                    <div *ngIf="this.dayLateBool == true" style="margin-left: 5px;">
+                        <input style='width: 60px;' formControlName ='dayDelayForm'>
+                    </div>
+                </div>
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div >
+                    Defecte la exterior: 
+                    </div>
+                    <div style="margin-left: 35px;">
+                        <mat-radio-group aria-label="Select an option" (change)="externalDefects($event)">
+                            <mat-radio-button value="false" >Nu</mat-radio-button>
+                            <mat-radio-button style="margin-left:5px" value="true">Da</mat-radio-button>
+                        </mat-radio-group>
+                    </div> 
+                </div>
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div >
+                    Defecte la interior: 
+                    </div>
+                    <div style="margin-left: 41px;">
+                        <mat-radio-group aria-label="Select an option" (change)="internalDefects($event)">
+                            <mat-radio-button value="false">Nu</mat-radio-button>
+                            <mat-radio-button style="margin-left:5px" value="true">Da</mat-radio-button>
+                        </mat-radio-group>
+                    </div> 
+                </div>
+
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div >
+                    Returnarea garantiei
+                    </div>
+                    <div style="margin-left: 29px;">
+                        <mat-radio-group aria-label="Select an option" (change)="returnWarranty($event)">
+                            <mat-radio-button value="false">Nu</mat-radio-button>
+                            <mat-radio-button style="margin-left:5px" value="true">Da</mat-radio-button>
+                        </mat-radio-group>
+                    </div> 
+                </div>
+
+                <div style=" margin-bottom: 10px;">
+                    <div >
+                        Alte mentiuni
+                    </div>
+                    <div >
+                        <textarea style="border: solid 1px; border-radius: 5px; padding: 10px; max-height: 50px;" 
+                        cols="20" rows="10" formControlName="mentionForm">
+                    </textarea>
+                    </div>
+                </div>
+            </form>
+           
+        </div>
+        <div  class="col-md-6 carProperty" >
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numele clientului:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingEnd.completName}}
+                </div>
+            </div>
+           
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numarul de  telefon:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingEnd.phoneNumber}}
+                </div>
+            </div>
+           
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Data si ora predarii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingEnd.finishDataFormat}}, {{this.schedulingEnd.returnTime}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Locatia predarii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingEnd.takeLocation}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                  Numarul de zile:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingEnd.numberOfDay}} zile
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                  Pret:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingEnd.totalPrice}} €
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="display: flex; justify-content: space-around;">
+            <div style="text-align: center; margin-top: 20px;">
+                <button mat-raised-button style="color:#cca502" (click)="onSubmitEndRent(true)" [disabled]="!userHistoryGroup.valid" [mat-dialog-close]="true">Preluare masina</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button mat-raised-button style="color:#cca502" (click)="onSubmitEndRent(false)" [mat-dialog-close]="true">Anulare</button>
+            </div>
+        </div>
+    </div>
+ 
+</div>

@@ -1,0 +1,119 @@
+<div>
+  <div>
+    <div class="tab-header">
+
+    </div>
+    <mat-toolbar class="toolbarStyle" class="app-header">
+
+      <div class="nav-tool-items" style="display: flex; justify-content: space-between; width: 100%;">
+        <div>
+          <a mat-button routerLink="/rent-car-list" routerLinkActive='active'> MASINI DE INCHIRIAT</a>
+          <ng-container *ngIf="user === 'User'">
+
+            <a mat-button routerLink="/user/request" routerLinkActive='active'> ADAUGA MASINA TA</a>
+
+            <a mat-button routerLink="/user/myCar" routerLinkActive='active'> VEZI MASINILE
+              TALE</a>
+          </ng-container>
+
+          <ng-container *ngIf="user === 'Admin'">
+            <button mat-button [matMenuTriggerFor]="menu">ADMINISTRARE MASINI <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item routerLink="/admin/car-for-rent" routerLinkActive='active'
+                style="width: 200px; text-align: center;"> MASINI DE INCHIRIAT</button>
+              <button mat-menu-item routerLink="/admin/disabled-car" routerLinkActive='active'
+                style="width: 200px; text-align: center;">MASINI RETRASE</button>
+            </mat-menu>
+            <a mat-button routerLinkActive='active' routerLink="/user/request">ADAUGA MASINA CA ADMIN</a>
+
+            <button mat-button [matMenuTriggerFor]="menuDOI">ADMINISTRARE CERERI <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menuDOI="matMenu">
+              <a mat-button routerLink="/admin/request/list" routerLinkActive='active'> CERERI DE
+                ADAUGARE MASINA</a>
+              <a mat-button routerLink="/admin/scheduling/list" routerLinkActive='active'> CERERI DE
+                INCHIRIERE</a>
+  
+              <a mat-button routerLink="/admin/request/retreat-car" routerLinkActive='active'> CERERI DE RETRAGERE
+                MASINI</a>
+            </mat-menu>
+         
+            <!-- <a mat-button routerLink="/admin/request/list" routerLinkActive='active'> CERERI DE
+              ADAUGARE MASINA</a>
+            <a mat-button routerLink="/admin/scheduling/list" routerLinkActive='active'> CERERI DE
+              INCHIRIERE</a>
+
+            <a mat-button routerLink="/admin/request/retreat-car" routerLinkActive='active'> CERERI DE RETRAGERE
+              MASINI</a> -->
+          </ng-container>
+          <a mat-button routerLink="/conditions" routerLinkActive='active'> CONDITII</a>
+          <a mat-button routerLink="/contact" routerLinkActive='active'> CONTACTE</a>
+
+        </div>
+        <div style="display: flex;justify-content: center;align-items: center;">
+          <div *ngIf="isLogin === true" style="width: 52px;">
+            <button (click)="clickButtonNotification()" mat-menu-item [matMenuTriggerFor]="menu">
+              <mat-icon matBadge= {{notificationList?.length}}>
+                notifications
+              </mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" class="notification-menu-header">
+              <div style="display: flex; justify-content: space-between; width: 486px;  border-bottom: 1px solid #e8e8e8">
+                <mat-label style="margin-top:13px; margin-left:16px; ">Notificari primite</mat-label >   
+              </div>
+              <ng-container *ngIf="user === 'Admin'">
+                <div class="noticationNonColor" *ngFor="let element of notificationList" style=" border-bottom: 1px solid #e8e8e8;" >
+                  <li class="body1" style="margin-top: 8px; margin-left:13px; align-items: flex-end; " (click)="redirectToNotificatin(element?.type)"> Ai primit o cerere de 
+                    <span style="color: #cca602;">{{element.type}}</span> in data 
+                    <span style="color: #cca602;">{{element?.dateFormat}}</span> </li>
+                </div>
+              </ng-container>
+
+             <ng-container *ngIf="user === 'User'">
+              <div class="noticationNonColor mouseHover " *ngFor="let element of notificationList" style=" border-bottom: 1px solid #e8e8e8;" >
+                <li class="body1" style="margin-top: 8px; margin-left:13px; align-items: flex-end" (click)="redirectToProfile()"> Ai primit raspuns la
+                  <span style="color: #cca602;">{{element.type}}</span> din data 
+                  <span style="color: #cca602;">{{element?.dateFormat}}</span> </li> 
+              </div>
+            </ng-container>
+
+            </mat-menu>
+          </div>
+
+          <a *ngIf="isLogin === true" style="margin-right: 10px;" mat-button routerLink="/home" routerLinkActive='active'>
+            <mat-icon>person_pin</mat-icon> Profil
+          </a>
+          <!-- <button (click)="drawer.toggle()"> sideBar</button> -->
+
+          <button class="btn  my-2 my-sm-0 ml-auto" style="background-color: white;color: #cca602;" (click)="onLogout()"
+            *ngIf="isLogin === true">Logout</button>
+          <a mat-button routerLink="/login" style="background-color: white;color: #cca602;" routerLinkActive="active"
+            *ngIf="isLogin == false">Log in</a>
+
+        </div>
+
+
+      </div>
+    </mat-toolbar>
+    <!-- 
+    <mat-drawer-container [hasBackdrop]=false  autosize>
+      <mat-drawer #drawer [mode]="'over'" class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+  
+          Toggle extra text
+       
+      </mat-drawer>
+    
+      <div >
+        <router-outlet></router-outlet>
+      </div>
+    
+    </mat-drawer-container> -->
+
+
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

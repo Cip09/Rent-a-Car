@@ -1,0 +1,139 @@
+<div style="width: 800px; max-height: 630px;">
+    <div class="titleModal">
+        <h2>Cerere de retragere
+            <span *ngIf="typeModal === 'temporary'">
+                temporara
+            </span>
+
+            <span *ngIf="typeModal === 'permanent'">
+                permanenta
+            </span>
+
+            a masina
+        </h2>
+        <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon"
+            [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </div>
+    <hr>
+
+    <div class="row" style="border-bottom: solid 1px  rgba(0,0,0,.1); padding-bottom: 20px;">
+        <div class="col-md-8 col-xs-12">
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numele proprietarului:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car.carOwner.fullName}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numar de telefon:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car?.carOwner?.phoneNumber}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Masina:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.car.carBrand}} {{this.car.modelCar}}
+                </div>
+            </div>
+
+            <div>
+                <div class="carProperty" style="display: flex; margin-top: 10px;">
+                    <div>
+                        Data de inceput a retragerii:
+                    </div>
+                    <div style="color:#cca502; margin-left: 10px;">
+                        {{this.data.row.startDataFormat}}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="typeModal === 'temporary'">
+                <div class="carProperty" style="display: flex; margin-top: 10px;">
+                    <div>
+                        Data de final a retragerii
+                    </div>
+                    <div style="color:#cca502; margin-left: 10px;">
+                        {{this.data.row.finishDataFormat}}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="carProperty" style="display: flex; margin-top: 10px;">
+                    <div>
+                        Motiv
+                    </div>
+                    <div style="color:#cca502; margin-left: 10px;">
+                        {{this.data.row.mention}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+
+            <div>
+                <div class="carProperty" style="display: flex; margin-top: 10px;">
+                    <div>
+                        Masina cu numarul:
+                    </div>
+                    <div style="color:#cca502; margin-left: 10px; font-size: 50px;">
+                        {{this.car.id}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 20px; text-align: center;"> Inchirierile programate in perioada de retragere</h3>
+    <div>
+     
+    </div>
+
+
+    <table style="width: 100%;" mat-table [dataSource]="dataTable" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef style="display:none;">id</th>
+            <td mat-cell *matCellDef="let element" style="display:none;">{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn" style="text-align: center;">Nume</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn" style="text-align: center;"> {{element.client?.fullName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Telefon</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.phoneNumber}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dataInterval">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Data</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.startDataFormat}} > {{element.finishDataFormat}}</td>
+        </ng-container>
+
+
+        <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+
+        <tr mat-header-row *matHeaderRowDef="nextScheduling_displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: nextScheduling_displayedColumns;"></tr>
+     
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[2, 5, 10]" 
+    showFirstLastButtons></mat-paginator>
+
+
+
+    <div style="display: flex; justify-content: space-evenly; margin-bottom: 15px; margin-top:20px">
+        <button mat-raised-button style="color: #cca502;" (click)="responseRequest(true)"> Aprobare</button>
+        <button mat-raised-button style="color: #cca502;" (click)="responseRequest(false)"> Respingere</button>
+
+      </div>
+</div>

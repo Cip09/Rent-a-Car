@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+  }
+
+  
+.mat-row .mat-cell {
+  border-bottom: 1px solid ;
+  border-top: 1px solid ;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.celAlighn{
+  width: 25%;
+  text-align: center;
+}

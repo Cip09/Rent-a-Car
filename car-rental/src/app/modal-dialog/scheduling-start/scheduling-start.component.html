@@ -1,0 +1,157 @@
+<div style="width: 800px;">
+    <div class="titleModal">
+      <h2>Preluarea masinii de catre client</h2>
+    <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon" [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+   
+    </div>
+    <hr>
+    
+    <div class="row"  style="border-bottom: solid 1px rgba(0,0,0,.1); ">
+      
+        <div  class="col-md-6 " style="padding-bottom: 20px;" >
+            
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numele clientului:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingStart.completName}}
+                </div>
+            </div>
+           
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numarul de  telefon:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingStart.phoneNumber}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Locatia preluarii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingStart.takeLocation}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Data si ora preluarii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.schedulingStart.startDataFormat}}, {{this.schedulingStart.takeTime}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                  Numar de zile:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                   {{this.schedulingStart.numberOfDay}} zile
+                </div>
+            </div>
+        </div>
+        <div  class="col-md-6 carProperty" style="border-left: solid 1px rgba(0,0,0,.1);">
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                  Masina:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                   {{this.schedulingStart.car.carBrand}} {{this.schedulingStart.car.modelCar}}
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                  Numarul masinii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                   {{this.schedulingStart.car.id}} 
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                 Numarul de KM a masinii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                   {{this.schedulingStart.car.carKm}} Km
+                </div>
+            </div>
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Numarul de KM de la ultima revizie:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                   {{this.schedulingStart.car.lastServicesKm}} Km
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Data ultimei revizii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                   {{this.dataServiceCarFormat}} 
+                </div>
+            </div>
+  
+        </div>
+    </div>
+
+    <div style=" margin-top: 20px; margin-bottom: 10px; display: flex; margin-left: 20px;" >
+        Optionale:
+        <div style="margin-left:15px;">
+            <div style="color: #cca502; margin-left: 10px;" *ngIf="this.schedulingStart.gps == true">
+                - GPS
+            </div>
+            <div style="color: #cca502; margin-left: 10px;" *ngIf="this.schedulingStart.childSeatOption == true">
+                - Scaun de copil
+            </div>
+            <div style="color: #cca502; margin-left: 10px;" *ngIf="this.schedulingStart.snowChains == true">
+                - Lanturi de zapada
+            </div>
+            <div style="color: #cca502; margin-left: 10px;" *ngIf="this.schedulingStart.windshieldFluid == true">
+                - Lichid de parbriz suplimentar
+            </div>
+            <div *ngIf="(this.schedulingStart.gps == false) && (this.schedulingStart.childSeatOption == false) && (this.schedulingStart.snowChains == false) && (this.schedulingStart.windshieldFluid == false)">
+                Nu sunt alte optiuni cerute
+            </div>
+        </div>
+     </div>
+
+    <div style="display: flex; justify-content: space-between;" *ngIf="this.refuseReson == false">
+        <div style="text-align: center; margin-top: 20px;">
+            <button mat-raised-button style="color:#cca502" (click)="onSubmitStartRent(true)" [mat-dialog-close]="true">Masina predata clientului</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button mat-raised-button style="color:#cca502" (click)="onSubmitStartRent(false)" >Predare nereusita</button>
+        </div>
+    </div>
+
+    <div  *ngIf="this.refuseReson == true">
+        <form [formGroup]="mentionGroup">
+            <div style="margin-top: 20px; margin-left: 20px;">
+                <div >
+                    Motiv refuz:
+                </div>
+                <div >
+                    <textarea style="border: solid 1px; border-radius: 5px; padding: 10px; max-height: 115px;" 
+                    cols="70" rows="10" formControlName="mentionForm">
+                </textarea>
+                </div>
+            </div>
+         </form>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="text-align: center; margin-top: 20px;">
+                <button mat-raised-button style="color:#cca502" (click)="submitRefusReson(true)" [disabled]="!mentionGroup.valid" [mat-dialog-close]="true">Trimite motiv</button>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button mat-raised-button style="color:#cca502" (click)="submitRefusReson(false)">Anuleaza</button>
+            </div>
+        </div>
+    </div>
+    
+</div>

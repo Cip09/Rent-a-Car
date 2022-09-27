@@ -1,0 +1,16 @@
+.button{
+    color: #cca502; 
+    width: 100%; 
+    margin-bottom: 15px; 
+    font-size: 20px; 
+    height: 52px;
+}
+
+.text{
+    /* color: #5a5a5a; */
+    line-height: 28px;
+    width: 100%;
+    background-position: 0 10px;
+    float: left;
+    font-weight: 300;
+}

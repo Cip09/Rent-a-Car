@@ -1,0 +1,298 @@
+<div style="width: 800px; max-height: 700px;">
+    <div class="titleModal">
+        <h2>Detalii despre masina ta</h2>
+        <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon"
+            [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </div>
+
+    <hr>
+
+    <div class="row" style="border-bottom: solid 1px rgba(0,0,0,.1)">
+        <div class="col-md-6"
+            style="border-right: solid 1px rgba(0,0,0,.1); margin-top: -18px; padding-top: 30px; padding-bottom: 15px;">
+            <div [style]="'text-align: center; border-bottom: #e8e8e8 solid; width: 100%; height: 250px;    background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-origin: content-box; background-image: url(' + myCar.base64Image + ');'">
+
+                <!-- <img [src]= car.base64Image  > -->
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Masina:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.myCar.carBrand}} {{this.myCar.modelCar}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Pret pe zi de inchiriere
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.myCar.pricePerDay}}
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Kilometri masinii:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{this.myCar.carKm}} Km
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Ultima revizie:
+                </div>
+                <div class="lastKmRevizion" *ngIf="myCar.carKm - myCar.lastServicesKm > 10000" style="color:red" >
+                    {{this.myCar.lastServicesKm}} Km 
+                </div>
+                <div class="lastKmRevizion" *ngIf="myCar.carKm - myCar.lastServicesKm < 10000" style="color:#cca502" >
+                    {{this.myCar.lastServicesKm}} Km 
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                    Kilometri parcursi in regim de inchiriere:
+                </div>
+                <div style="color:#cca502; margin-left: 10px;">
+                    {{totalKmCarTravelInRent}} Km
+                </div>
+            </div>
+
+            <div class="carProperty" style="display: flex; margin-top: 10px;">
+                <div>
+                   Data expirarii ITP-ului:
+                </div>
+                <div style="color: #cca502; margin-left: 8px;">
+                    {{this.myCar.itpFormat}}
+                </div>
+                
+                <!-- <div class="lastKmRevizion" *ngIf="myCar.itp - today < 5" style="color:red" >
+                    {{this.myCar.itpFormat}}  rosu
+                </div>
+                <div class="lastKmRevizion" *ngIf="myCar.itp > 5" style="color:#cca502" >
+                    {{this.myCar.itpFormat}}  nromal
+                </div> -->
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div *ngIf="this.showHistory == true"
+        style="color:#cca502; margin-bottom: 10px; margin-top: 10px; margin-left: 20px; text-align: center;">
+        Istoric inchirieri
+    </div>
+    <div *ngIf="historyAproved_dataSource?.length > 0 && this.showHistory == true" style="margin-top:20px; width: 100%;">
+
+        <table mat-table [dataSource]="historyApproved_dataTable" class="mat-elevation-z8" style="width: 100%;">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef style="display:none;">id</th>
+                <td mat-cell *matCellDef="let element" style="display:none;">{{element.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="data">
+                <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Interval inchiriere</th>
+                <td mat-cell *matCellDef="let element" class="celAlighn alighText"> {{element.startData}} >
+                    {{element.endData}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="dayLate" class="celAlighn">
+                <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Zile intarziere</th>
+                <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                    <div *ngIf="element.dayLate != 0">
+                        {{element.dayLate}}
+                    </div>
+
+                    <div *ngIf="element.dayLate == 0">
+                        <mat-icon style="color: green">close</mat-icon>
+                    </div>
+                </td>
+
+            </ng-container>
+
+            <ng-container matColumnDef="externalDefects" class="celAlighn">
+                <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Defecte</th>
+                <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                    <div *ngIf="element.externalDefects == true || element.internalDefects == true">
+                        <mat-icon style="color: red">check</mat-icon>
+                    </div>
+                    <div *ngIf="element.externalDefects == false || element.internalDefects == false">
+                        <mat-icon style="color: green">close</mat-icon>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="moneyPaid" class="celAlighn ">
+                <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Pret total</th>
+                <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                    {{element.moneyPaid}} €
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="returnWarranty" class="celAlighn alighText">
+                <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Reparatii pe garantie</th>
+                <td mat-cell *matCellDef="let element" class="celAlighn alighText">
+                    <div *ngIf="element.returnWarranty == true">
+                        <mat-icon style="color: green">check</mat-icon>
+                    </div>
+                    <div *ngIf="element.returnWarranty == false">
+                        <mat-icon style="color: red">close</mat-icon>
+                    </div>
+                </td>
+
+            </ng-container>
+
+            <ng-container matColumnDef="kmTraveled" class="celAlighn alighText">
+                <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Km parcursi</th>
+                <td mat-cell *matCellDef="let element" class="celAlighn alighText">{{element.kmTraveled}} Km</td>
+
+            </ng-container>
+
+
+            <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="historyAproved_displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: historyAproved_displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginatorApproved [pageSizeOptions]="[2, 5, 10]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+    <div *ngIf="(historyAproved_dataSource?.length == 0 || historyAproved_dataSource == null) && this.showHistory == true"
+        style="text-align: center; margin-top: 30px;">
+        Nu exista date!
+    </div>
+
+    <div style="margin-top: 20px; width: 100%; display: flex; justify-content: space-around;">
+        <button mat-raised-button (click)="showHistorianSubmit()" *ngIf="this.showHistory == false"
+            style=" margin-top: 20px; color:#cca502; ">
+            Vezi istoricul masinii
+        </button>
+
+        <button mat-raised-button (click)="withdrawCar()" style=" margin-top: 20px; color:#cca502;"
+            *ngIf="this.withdrawCarBool == false">
+            Retrage masina
+        </button>
+    </div>
+
+    <div *ngIf="this.withdrawCarBool == true">
+        <mat-slide-toggle (change)="slideChange()">Temporar / Permanent</mat-slide-toggle>
+        <form [formGroup]="widthdrawTemporaryGroup" *ngIf="this.withdtawCarPermanentBool == false">
+            <div style="margin-top: 15px; text-align: center; color: #cca502;">
+                Retrage masina temporar
+            </div>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px">
+                <div>
+                    <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                        <mat-label>Data de inceput</mat-label>
+                        <input matInput [matDatepicker]="dataStartForm" formControlName="dataStartForm" [min]="today"
+                            [max]="maxDateTake">
+                        <mat-datepicker-toggle matSuffix [for]="dataStartForm"></mat-datepicker-toggle>
+                        <mat-datepicker #dataStartForm></mat-datepicker>
+                    </mat-form-field>
+                    <label class="text-danger"
+                        *ngIf="widthdrawTemporaryGroup.get('dataStartForm')!.touched && widthdrawTemporaryGroup.get('dataStartForm')!.errors?.required">
+                        </label>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                        <mat-label>Data de final</mat-label>
+                        <input matInput [matDatepicker]="dataEndForm" formControlName="dataEndForm" [min]="minDate"
+                            [max]="maxDate">
+                        <mat-datepicker-toggle matSuffix [for]="dataEndForm"></mat-datepicker-toggle>
+                        <mat-datepicker #dataEndForm></mat-datepicker>
+                    </mat-form-field>
+                    <label class="text-danger"
+                        *ngIf="widthdrawTemporaryGroup.get('dataEndForm')!.touched && widthdrawTemporaryGroup.get('dataEndForm')!.errors?.required">
+                        </label>
+                </div>
+            </div>
+            <div style="    display: flex;
+            align-items: center;
+            justify-content: center;">
+                <div style="margin-right: 20px;"> Motiv</div>
+
+                <textarea style="border: solid 1px; border-radius: 5px; padding: 10px; max-height: 210px;" cols="20"
+                    rows="3" formControlName="reasonForm">
+                </textarea>
+            </div>
+            <div style="display: flex; justify-content: space-around; padding-bottom: 30px;">
+                <button mat-raised-button (click)="retreatCar('temporary')" [disabled]='!widthdrawTemporaryGroup.valid' 
+                    style=" margin-top: 20px; color:#cca502; ">
+                    Retrage masina temporar
+                </button>
+
+                <button mat-raised-button (click)="cancelRetreat()" 
+                    style=" margin-top: 20px; color:#cca502; ">
+                    Anuleaza
+                </button>
+
+            </div>
+
+            <div style="height: 30px;">
+
+            </div>
+        </form>
+
+        <form [formGroup]="widthdrawPermanentGroup" *ngIf="this.withdtawCarPermanentBool == true">
+            <div style="margin-top: 15px; text-align: center; color: #cca502;">
+                Retrage masina permanent
+            </div>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; align-items: center">
+                <div>
+                    <mat-form-field appearance="fill" class="example-full-width" style="width: 200px;">
+                        <mat-label>Data de inceput</mat-label>
+                        <input matInput [matDatepicker]="dataPermanentStartForm"
+                            formControlName="dataPermanentStartForm" [min]="today" [max]="maxDateTake">
+                        <mat-datepicker-toggle matSuffix [for]="dataPermanentStartForm"></mat-datepicker-toggle>
+                        <mat-datepicker #dataPermanentStartForm></mat-datepicker>
+                    </mat-form-field>
+                    <label class="text-danger"
+                        *ngIf="widthdrawPermanentGroup.get('dataPermanentStartForm')!.touched && widthdrawPermanentGroup.get('dataPermanentStartForm')!.errors?.required">
+                        </label>
+                </div>
+                <div>
+                    <div style="margin-bottom: 10px;"> Motiv</div>
+
+                    <textarea style="border: solid 1px; border-radius: 5px; padding: 10px; max-height: 210px;" cols="20"
+                        rows="3" formControlName="reasonPermForm">
+                    </textarea>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-around; padding-bottom: 30px;">
+                <button mat-raised-button (click)="retreatCar('permanent')" [disabled]='!widthdrawPermanentGroup.valid' 
+                    style=" margin-top: 20px; color:#cca502; ">
+                    Retrage masina permanent
+                </button>
+
+                <button mat-raised-button (click)="cancelRetreat()" 
+                    style=" margin-top: 20px; color:#cca502; ">
+                    Anuleaza
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+
+
+</div>

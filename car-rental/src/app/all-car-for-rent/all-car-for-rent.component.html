@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-2 vl">
+       
+    </div>
+    <div class="col-10 borderDown" >
+        <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+            <div style="display: flex; justify-content: space-around;margin-top: 30px;">
+                <div style="margin-top: 20px; margin-right: 30px;">Data de start</div>
+                
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Start</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; justify-content: space-around;margin-top: 30px;">
+               <div style="margin-top: 20px; margin-right: 30px;">Data de final  </div> 
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Final</mat-label>
+                    <input matInput [matDatepicker]="pickerEnd">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div style="margin-top: 33px;">
+                <form class="example-form">
+                <mat-form-field class="example-full-width">
+                <span matPrefix> </span>
+                <input type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "search">
+                <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+                </mat-form-field>
+                <br/>
+                {{search}}
+                </form>
+            </div>
+           
+        </div>
+   
+        
+    </div>
+</div>

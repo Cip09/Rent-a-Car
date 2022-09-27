@@ -1,0 +1,372 @@
+<div style="width: 800px; max-height: 666px;">
+    <div class="titleModal">
+      <h2>Cerere de aprobare inchiriere</h2>
+     <!-- <button  mat-raised-button class="close-icon" [mat-dialog-close]="true">
+      X
+    </button>  -->
+    <button mat-icon-button style="color: black;" aria-label="Example icon button with a home icon" (click)="close(false)">
+        <mat-icon>close</mat-icon>
+    </button>
+   
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6" >
+            <div style="border: solid 1px; border-radius: 4px;">
+                <div class="row">
+                    <div class="labelTitle">
+                    Detalii masina
+                    </div>
+                    <div class="col-md-9" style="margin-top:10px; min-height:400px;">
+                    
+                        <div style="display: flex;" class="carProperty">
+                            Masina:
+                            <div style="color: #cca502; margin-left: 10px;">
+                                {{this.request.car.carBrand}} {{this.request.car.modelCar}}
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-top: 10px;" class="carProperty">
+                            An:
+                            <div style="color: #cca502; margin-left: 10px;">
+                                {{this.request.car.year}} 
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-top: 10px;" class="carProperty">
+                            Color:
+                            <div style="color: #cca502; margin-left: 10px;">
+                                {{this.request.car.colorCar}} 
+                            </div>
+                        </div>
+
+                        <div style="display: flex; margin-top: 10px;" class="carProperty">
+                            Capacitate motor:
+                            <div style="color: #cca502; margin-left: 10px;">
+                                {{this.request.car.engine}} L
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-top: 10px;" class="carProperty">
+                            Combustibil:
+                            <div style="color: #cca502; margin-left: 10px;">
+                                {{this.request.car.fuel}} 
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-top: 10px; margin-bottom: 10px;" class="carProperty">
+                            Cutie de viteze:
+                            <div style="color: #cca502; margin-left: 10px;">
+                                {{this.request.car.gearBox}} 
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-top: 10px; margin-bottom: 10px;" class="carProperty">
+                           Climatizare:
+                            <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.car.climate == true">
+                                Da 
+                            </div>
+                            <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.car.climate == false">
+                                Nu
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-top: 10px; margin-bottom: 10px;" class="carProperty">
+                            Navigatie:
+                             <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.car.navigation == true">
+                                 Da
+                             </div>
+                             <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.car.navigation == false">
+                                Nu
+                            </div>
+                         </div>
+                         <div style=" margin-top: 10px; margin-bottom: 10px;" >
+                            Optionale:
+                            <div style="margin-left:45px;">
+                                <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.gps == true">
+                                    - GPS
+                                </div>
+                                <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.childSeatOption == true">
+                                    - Scaun de copil
+                                </div>
+                                <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.snowChains == true">
+                                    - Lanturi de zapada
+                                </div>
+                                <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.windshieldFluid == true">
+                                    - Lichid de parbriz suplimentar
+                                </div>
+                                <div *ngIf="(this.request.gps == false) && (this.request.childSeatOption == false) && (this.request.snowChains == false) && (this.request.windshieldFluid == false)">
+                                    Nu sunt alte optiuni cerute
+                                </div>
+                            </div>
+                         </div>
+                         <div style="display: flex; margin-top: 10px; margin-bottom: 10px;" >
+                            Mentiuni:
+                             <div style="color: #cca502; margin-left: 10px;">
+                                 {{this.request.mention}} 
+                             </div>
+                             <div style="color: #cca502; margin-left: 10px;" *ngIf="this.request.mention == ''">
+                                nu sunt mentiuni suplimentare
+                            </div>
+                         </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top: 20px;">
+                        <div  class="carProperty">
+                            <div>
+                                Numar masina:
+                            </div>
+                            <div style="color:#cca502; font-size: 30px;">
+                                {{this.request.car.id}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+        <div class="col-md-6" style="padding: 0px;">
+            <div style="border: solid 1px; border-radius: 4px; padding-left: 10px;">
+                <div class="labelTitle">
+                    Detalii rezervare
+                </div>
+                <div >
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Numele clientului: 
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request?.completName}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Adresa de email:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request?.client.email}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Numarul de telefon:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.phoneNumber}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Data de inceput:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.startDataFormat}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Locatia de preluare:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.takeLocation}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Ora de preluare:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.takeTime}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                            Data de final:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.finishDataFormat}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Locatia de predare:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.returnLocation}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Ora de predare:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.returnTime}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Metoda de plata:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.payMethod}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Numar total de zile:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.numberOfDay}}
+                        </div>
+                    </div>
+                    <div  class="carProperty" style="display: flex; margin-top: 10px;">
+                        <div>
+                        Pret:
+                        </div>
+                        <div style="color:#cca502; margin-left: 10px;">
+                            {{this.request.totalPrice}} €
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <div>
+        <div style="text-align: center;">
+            <button mat-raised-button (click)="showHistorianSubmit()" *ngIf="this.showHistorian == false" style=" margin-top: 20px; color:#cca502">
+                Vezi istoricul clientului
+            </button>
+        </div>
+        <!-------------------------------------------------------- Istoric client --------------------------------------------------------------------->
+        <div *ngIf="this.showHistorian == true">
+          
+            <h3 style="margin-top: 15px; text-align: center;   font-weight: bold;"> Inchirieri incheiate </h3>
+            <div *ngIf="historyAproved_dataSource?.length > 0">
+                <table mat-table [dataSource]="historyApproved_dataTable" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="id" >
+                        <th mat-header-cell *matHeaderCellDef  style="display:none;">id</th>
+                        <td mat-cell *matCellDef="let element"  style="display:none;">{{element.id}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="fullName" class="celAlighn">
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn" style="padding-left: 10px;">Nume</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn" style="padding-left: 10px;">   {{element.fullNameClient}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="carBrand" >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Marca</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText">   {{element.brandCar}} {{element.modelCar}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="numberOfday" class="celAlighn " >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Zile inchiriere</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText">   {{element.dayNumber}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dayLate" class="celAlighn" >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Zile intarziere</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText" >
+                            <div *ngIf="element.dayLate != 0">
+                                {{element.dayLate}}
+                            </div> 
+                            
+                            <div *ngIf="element.dayLate == 0">
+                                <mat-icon style="color: green">close</mat-icon>
+                            </div>
+                        </td>
+                
+                    </ng-container> 
+
+                    <ng-container matColumnDef="externalDefects" class="celAlighn" >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Defecte exterioare</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText" >  
+                            <div *ngIf="element.externalDefects == true">
+                                <mat-icon style="color: red">check</mat-icon>
+                            </div>
+                            <div  *ngIf="element.externalDefects == false">
+                                <mat-icon style="color: green">close</mat-icon>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="internalDefects" class="celAlighn " >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Defecte interioare</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText" >  
+                            <div *ngIf="element.internalDefects == true">
+                                <mat-icon style="color: red">check</mat-icon>
+                            </div>
+                            <div  *ngIf="element.internalDefects == false">
+                                <mat-icon style="color: green">close</mat-icon>
+                            </div>
+                        </td>
+                    </ng-container> 
+
+                    <ng-container matColumnDef="mention" class="celAlighn alighText" >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Alte observatii</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText">{{element.mention}}</td>
+                        
+                    </ng-container>
+
+            
+                    <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+            
+            
+                    
+            <tr mat-header-row *matHeaderRowDef="historyAproved_displayedColumns"></tr>
+            <tr
+                mat-row 
+    
+            
+                *matRowDef="let row; columns: historyAproved_displayedColumns;"
+            ></tr>
+                </table>
+                <mat-paginator #paginatorApproved [pageSizeOptions]="[2, 5, 10]" 
+                showFirstLastButtons></mat-paginator>
+             </div>
+
+             <div *ngIf="historyAproved_dataSource?.length == 0 || historyAproved_dataSource == null" style="text-align: center;">
+                Nu exista date!
+             </div>
+
+            <h3 style="margin-top: 15px; text-align: center;   font-weight: bold;"> Inchirieri anulate de client </h3>
+            <div *ngIf="historyDecline_dataSource.length > 0">
+                <table mat-table [dataSource]="historyDecline_dataTable" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="id" >
+                        <th mat-header-cell *matHeaderCellDef  style="display:none;">id</th>
+                        <td mat-cell *matCellDef="let element"  style="display:none;">{{element.id}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="fullName" class="celAlighn">
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn" style="padding-left: 10px;">Nume</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn" style="padding-left: 10px;">   {{element.fullNameClient}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="carBrand" >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Marca</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText">   {{element.brandCar}} {{element.modelCar}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="declineReason" class="celAlighn" >
+                        <th mat-header-cell *matHeaderCellDef class="celAlighn alighText">Motivul refuzului</th>
+                        <td mat-cell *matCellDef="let element" class="celAlighn alighText">{{element.declineReason}}</td>
+                    </ng-container>
+
+                    <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+                
+            <tr mat-header-row *matHeaderRowDef="historyDecline_displayedColumns"></tr>
+            <tr
+                mat-row 
+                *matRowDef="let row; columns: historyDecline_displayedColumns;"
+            ></tr>
+                </table>
+                <mat-paginator #paginatorDecline [pageSizeOptions]="[2, 5, 10]" 
+                showFirstLastButtons></mat-paginator>
+             </div>
+
+             <div *ngIf="historyDecline_dataSource?.length == 0 || historyDecline_dataSource == null" style="text-align: center;">
+                Nu exista date!
+             </div>
+        
+        </div>
+    </div>
+
+    <div style="display: flex;
+    justify-content: space-around; padding-bottom: 20px;">
+        <button mat-raised-button (click)="responseSheduling(true)" style=" margin-top: 20px; color:#cca602 " (click)="close(true)">
+           Aprobat
+        </button>
+        <button mat-raised-button (click)="responseSheduling(false)" style=" margin-top: 20px; color:#cca602 " (click)="close(true)">
+            Refuzat
+        </button>
+    </div>
+</div>

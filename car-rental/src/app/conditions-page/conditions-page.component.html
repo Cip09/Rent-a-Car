@@ -1,0 +1,251 @@
+<div class="container">
+    <h1 style="margin-top: 20px; text-align: center;"> Conditii pentru inchirierea masinii </h1>
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-3">
+            <button mat-raised-button (click)="showContent(0)"
+                [ngStyle]="arr[0]?{'background-color': 'black'} : {'background-color': 'white'}" class="button">
+                Inchiriere si restituire</button>
+            <button mat-raised-button (click)="showContent(1)"
+                [ngStyle]="arr[1]?{'background-color': 'black'} : {'background-color': 'white'}" class="button">
+                Conditii generale</button>
+            <button mat-raised-button (click)="showContent(2)"
+                [ngStyle]="arr[2]?{'background-color': 'black'} : {'background-color': 'white'}" class="button">
+                Obligatiile Clientului</button>
+            <button mat-raised-button (click)="showContent(3)"
+                [ngStyle]="arr[3]?{'background-color': 'black'} : {'background-color': 'white'}" class="button">
+                Garantie</button>
+            <button mat-raised-button (click)="showContent(4)"
+                [ngStyle]="arr[4]?{'background-color': 'black'} : {'background-color': 'white'}" class="button">
+                Asigurare</button>
+
+        </div>
+        <div class="col-md-9" style="border: solid 1px #d3cfcf; border-radius: 4px; position: relative;">
+            <div style="padding: 15px;">
+                <div *ngIf="arr[0] == true">
+                    <h1 style="color: #cca502; font-size: 28px; font-weight: 500"> Inchiriere si restituire</h1>
+                    <div style="margin-top: 15px">
+                        <div>
+                            CUM SA TE ASIGURI CA PRINZI O REDUCERE CAT MAI BUNA?
+                        </div>
+                        <div style="margin-top: 10px;">
+                            Pe masura ce numarul rezervarilor devine din ce in ce mai mare, iar istoricul inchirierilor
+                            este unul fara incidente pretul de inchiriere poate scadea.
+                        </div>
+                        <div style="margin-top: 10px;margin-bottom: 30px;">
+                            Companie de inchirieri auto Cluj va ofera spre inchiriere masini in stare buna de
+                            functionare, curate in interior si exterior; orice observatie legata de starea acestuia va
+                            fi anuntata de catre chirias in momentul preluarii de la agentia rent a car. In cazul in
+                            care remarcati aspecte suspecte sau orice alte semne anormale de functionare a
+                            autoturismului care pot periclita starea masinii inchiriate sau conditiile de securitate ale
+                            circulatiei, aveti obligatia de a sista calatoria si de a anunta reprezentantul firmei rent
+                            a car Cluj Napoca.
+                            <br>
+                            <br>
+                            <br> Taxa pentru inchirieri masini Cluj se achita in avans.
+                            <br>
+                            <br>
+                            Pentru rezervarile din perioadele foarte aglomerate ne rezervam dreptul de a percepe un
+                            avans de 10% din valoarea inchirierii, acesta este nereturnabil in cazul in care clientul
+                            anuleaza rezervarea. De asemenea, pentru sumele achitate la confirmarea rezervarii in
+                            vederea blocarii unui anumit autoturism, in cazul anularii rezervarii cu mai putin de 5 zile
+                            inainte de preluare, se va percepe o taxa de relocare a autoturismului de 50% din valoarea
+                            inchirierii.
+                            <br>
+                            <br>
+                            <br>
+                            Clientul se obliga sa returneze masina in conditiile in care a fost preluata,
+                            impreuna cu toate documentele si accesoriile care au fost predate in momentul inchirierii -
+                            conform fisei de predare. Orice intarziere care depaseste ora stabilita prin contract cu 3
+                            (trei) ore va fi semnalata politiei.
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="arr[1] == true">
+                    <h1 style="color: #cca502; font-size: 28px; font-weight: 500"> Conditii generale</h1>
+                    <div style="margin-top: 15px">
+                        <div style="margin-top: 10px;">
+                            Autoturismul poate fi condus doar de persoana/persoanele inscrise in contract. Persoana care
+                            doreste sa inchirieze si sa conduca un autoturism trebuie sa prezinte actul de identitate si
+                            permisul de conducere pentru persoanele cu domiciliul in Romania, pasaport si permis de
+                            conducere pentru persoanele cu domiciliul in strainatate.
+                        </div>
+                        <div style="margin-top: 10px;">
+                            Pretul de inchiriere acopera o medie de 200 km/zi. Kilometrii suplimentari se vor taxa cu 1
+                            ron/km (0.2 eur/km)
+
+                            <div style="display: flex; align-items: center; margin-top: 10px;">
+                                <div style="margin-right: 8px; display: flex;">
+                                    <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                                </div>
+                                <div>
+                                    perioada minima de inchiriere masina este de 1 (una) zi.
+                                </div>
+                            </div>
+
+                            <div style="display: flex; margin-top: 10px;">
+                                <div style="margin-right: 8px; display: flex;">
+                                    <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                                </div>
+                                <div>
+                                    combustibilul, in cazul in care masina inchiriata este returnata cu o cantitate mai
+                                    mica de combustibil fata de momentul inchirierii (taxa fiind de 2 EUR/litru);
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="margin-top: 10px;">
+                            In cazul in care autoturismul este returnat murdar, taxa de spalare este de 10 eur pentru
+                            gama standard si 15 eur pentru gama premium.
+
+                            <div style="display: flex; align-items: center; margin-top: 10px;">
+                                <div style="margin-right: 8px; display: flex;">
+                                    <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                                </div>
+                                <div>
+                                    pierderea sau distrugerea documentelor masinii se va taxa cu 100 EUR.
+                                </div>
+                            </div>
+
+                            <div style="display: flex; margin-top: 10px;">
+                                <div style="margin-right: 8px; display: flex;">
+                                    <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                                </div>
+                                <div>
+                                    costul tuturor amenzilor stabilite in cazul autoturismului pentru incalcarea
+                                    normelor privind parcarea, traficul sau a altor prevederi legale sunt suportate
+                                    exclusive de catre chirias;
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 10px;">
+                                In cazul in care masina se va returna cu zgarieturi, lovituri, huse murdare, sau arse,
+                                cu accesorii lipsa sau stricate, taxa de garantie nu se va restitui.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="arr[2] == true">
+                    <h1 style="color: #cca502; font-weight: 500"> Obligatiile Clientului</h1>
+                    <div style="display: flex; margin-top: 10px;">
+                        <div style="margin-right: 8px; display: flex;">
+                            <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                        </div>
+                        <div>
+                            sa respecte toare regulile de circulatie
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 10px;">
+                        <div style="margin-right: 8px; display: flex;">
+                            <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                        </div>
+                        <div>
+                            sa nu foloseasca masina in scopuri cum ar fi: transport pasageri sau marfa, tractare alte autoturisme, intreceri sau raliuri, subinchirere
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 10px;">
+                        <div style="margin-right: 8px; display: flex;">
+                            <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                        </div>
+                        <div>
+                            sa nu conduca masina sub influenta bauturilor alcoolice, a drogurilor sau a altor substante care scad capacitatea de a conduce
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 10px;">
+                        <div style="margin-right: 8px; display: flex;">
+                            <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                        </div>
+                        <div>
+                            sa anunte agentia in cazul in care autoturismul are probleme, acestea trebuie rezolvate numai de service-ul autorizat
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 10px;">
+                        <div style="margin-right: 8px; display: flex;">
+                            <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                        </div>
+                        <div>
+                            sa nu lase masina nesupravegheata cu cheile in contact, geamuri si usi deschise.
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="arr[3] == true">
+                    <h1 style="color: #cca502; font-weight: 500"> Garantie</h1>
+                    <div>
+                        Pentru fiecare masina de inchiriat Cluj este necesara si achitarea unei garantii de la 250 EUR, suma care va fi restituita integral in cazul in care clientul returneaza autoturismul neavariat la locul, data si ora prestabilite in contract.
+                    </div>
+                </div>
+                <div *ngIf="arr[4] == true">
+                    <h1 style="color: #cca502; font-weight: 500"> Asigurare</h1>
+                    <div style="margin-top: 10px;">
+                        Asigurarile cuprinse in acest contract sunt: asigurarea casco, furt intern, asigurare de pasageri si bagaje. Acestea sunt valabile numai pe teritoriul Romaniei. Chiria masinii include de asemenea RCA-ul si rovinieta (taxa de drum) valabile pe teritoriul Romaniei.
+                    </div>
+                    <br>
+                    <br>
+                    Nu se acorda despagubiri iar asigurarile isi inceteaza efectul in urmatoare cazuri:
+                    <br>
+                    <div>
+                        <div style="display: flex; margin-top: 10px;">
+                            <div style="margin-right: 8px; display: flex;">
+                                <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                            </div>
+                            <div>
+                                avarierea partii inferioare a autovehiculului (sasiu, bloc motor, baia de ulei, cutie de viteze) datorate unei actiuni deliberate sau neglijente;
+                            </div>
+                        </div>
+                
+                        <div style="display: flex; margin-top: 10px;">
+                            <div style="margin-right: 8px; display: flex;">
+                                <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                            </div>
+                            <div>
+                                orice avarie produsa din cauza conducerii autovehiculului pe alte drumuri decat cele publice;
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; margin-top: 10px;">
+                            <div style="margin-right: 8px; display: flex;">
+                                <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                            </div>
+                            <div>
+                                avarii produse ca urmare a accidentelor deliberate si a celor cauzate de conducerea sub influenta bauturilor alcoolice sau a altor substante care scad capacitatea de a conduce;
+                            </div>
+                        </div>
+                 
+                        <div style="display: flex; margin-top: 10px;">
+                            <div style="margin-right: 8px; display: flex;">
+                                <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                            </div>
+                            <div>
+                                avarii produse ca urmare a accidentelor datorate folosirii autovehicolului la intreceri si raliuri;
+                            </div>
+                        </div>
+                 
+
+                        <div style="display: flex; margin-top: 10px;">
+                            <div style="margin-right: 8px; display: flex;">
+                                <mat-icon style="color: #cca502">keyboard_arrow_right</mat-icon>
+                            </div>
+                            <div>
+                                daca in momentul producerii pagubei, autoturismul a fost condus de alta persoana, in afara celor inscrise in contractul de inchiriere.
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                   
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-footer></app-footer>

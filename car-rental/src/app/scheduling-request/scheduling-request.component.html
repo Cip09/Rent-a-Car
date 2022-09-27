@@ -1,0 +1,149 @@
+<div class="container">
+<h2 style="text-align: center; margin-top:30px"> Cereri care asteapta un raspuns</h2>
+<div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef  style="display:none;" >id</th>
+            <td mat-cell *matCellDef="let element"  style="display:none;" >{{element.id}}</td>
+          </ng-container>
+          <ng-container matColumnDef="fullName" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Numele clientului</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.completName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="data" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Intervalul de inchirieire</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.startDataFormat}} > {{element.finishDataFormat}}</td>
+          </ng-container>
+          <ng-container matColumnDef="carBrand" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Marca</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.car.carBrand}}</td>
+          </ng-container>
+          <ng-container matColumnDef="model" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Model</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.car.modelCar}}</td>
+          </ng-container>
+   
+          
+          <ng-container matColumnDef="payMethod">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Metoda de plata</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">{{element.payMethod}}</td>
+          </ng-container>
+
+   
+
+        <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+   
+          
+  <tr mat-header-row *matHeaderRowDef="programRequestList_displayedColumns"></tr>
+  <tr
+      mat-row 
+      (click)="onClickPendingRequest(row)"
+  
+      *matRowDef="let row; columns: programRequestList_displayedColumns;"
+  ></tr>
+    </table>
+  
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" 
+        showFirstLastButtons></mat-paginator>
+</div>
+
+<h2 style="text-align: center; margin-top:30px"> Cereri de inchiriere aprobare (care urmeaza sa fie livrate)</h2>
+<div>
+    <table mat-table [dataSource]="dataSource_paginatorApproved" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef  style="display:none;" >id</th>
+            <td mat-cell *matCellDef="let element"  style="display:none;" >{{element.id}}</td>
+          </ng-container>
+          <ng-container matColumnDef="fullName" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Numele clientului</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.completName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="data" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Intervalul de inchirieire</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.startDataFormat}} > {{element.finishDataFormat}}</td>
+          </ng-container>
+          <ng-container matColumnDef="carBrand" >
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Masina</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">{{element.car.carBrand}} {{element.car.modelCar}}</td>
+          </ng-container>
+  
+   
+          
+          <ng-container matColumnDef="payMethod">
+            <th mat-header-cell *matHeaderCellDef class="celAlighn">Metoda de plata</th>
+            <td mat-cell *matCellDef="let element" class="celAlighn">{{element.payMethod}}</td>
+          </ng-container>
+
+   
+
+        <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+   
+          
+  <tr mat-header-row *matHeaderRowDef="schedulingApproved_displayColumns"></tr>
+  <tr
+      mat-row 
+      (click)="isClickedRowStartScheduling(row)"  
+      *matRowDef="let row; columns: schedulingApproved_displayColumns;"
+  ></tr>
+    </table>
+  
+    <mat-paginator #paginatorApproved [pageSizeOptions]="[5, 10, 20]" 
+        showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+<h2 style="text-align: center; margin-top:30px"> Masini care au fost livrate si asteapta sa se intoraca</h2>
+<div>
+  <table mat-table [dataSource]="dataSource_start" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id" >
+          <th mat-header-cell *matHeaderCellDef  style="display:none;" >id</th>
+          <td mat-cell *matCellDef="let element"  style="display:none;" >{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="fullName" >
+          <th mat-header-cell *matHeaderCellDef class="celAlighn">Numele clientului</th>
+          <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.completName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="data" >
+          <th mat-header-cell *matHeaderCellDef class="celAlighn">Intervalul de inchirieire</th>
+          <td mat-cell *matCellDef="let element" class="celAlighn">   {{element.startDataFormat}} > {{element.finishDataFormat}}</td>
+        </ng-container>
+        <ng-container matColumnDef="carBrand" >
+          <th mat-header-cell *matHeaderCellDef class="celAlighn">Masina</th>
+          <td mat-cell *matCellDef="let element" class="celAlighn">{{element.car.carBrand}} {{element.car.modelCar}}</td>
+        </ng-container>
+
+ 
+        
+        <ng-container matColumnDef="return">
+          <th mat-header-cell *matHeaderCellDef class="celAlighn">Locatia de returnare</th>
+          <td mat-cell *matCellDef="let element" class="celAlighn"> {{element.returnLocation}} la ora {{element.returnTime}}</td>
+        </ng-container>
+
+ 
+
+      <td mat-footer-cell *matFooterCellDef colspan="99"></td>
+
+ 
+        
+<tr mat-header-row *matHeaderRowDef="schedulingStart_displayColumns"></tr>
+<tr
+    mat-row 
+    (click)="isClickedRowEndScheduling(row)"  
+    *matRowDef="let row; columns: schedulingStart_displayColumns;"
+></tr>
+  </table>
+
+  <mat-paginator #paginatorStart [pageSizeOptions]="[5, 10, 20]" 
+      showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+<app-footer></app-footer>
+
+

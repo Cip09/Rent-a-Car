@@ -1,0 +1,38 @@
+//$border-radius-width: 10px;
+
+.example-full-width {
+    
+    & > .mat-form-field-wrapper{
+        text-align: center !important;
+      
+
+        & > .mat-form-field-underline::before {
+            height: 0 !important;
+        }
+
+        & .mat-form-field-ripple {
+            height: 0 !important;
+        }
+
+        & .mat-form-field-flex{
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.14), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 3px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px !important;
+            background-color: white !important;
+        }
+
+     
+       
+    }
+  
+
+}
+
+ .row{
+    margin: 0;
+}
+
+.mat-form-field-underline{
+    height: 0px !important;
+}
+
+
